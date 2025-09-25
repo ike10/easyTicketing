@@ -1,0 +1,127 @@
+/* Design tokens */
+:root{
+  --brand: #0d6efd;
+  --brand-700: #0b5ed7;
+  --muted: #6c757d;
+  --surface: #ffffff;
+  --card-shadow: rgba(15, 23, 42, 0.06);
+  --radius: 12px;
+  --max-width: 1100px;
+  --code-bg: #f8f9fa;
+  --success: #198754;
+}
+
+/* Layout */
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #111827;
+  background: #fbfbfd;
+  padding-bottom: 40px;
+}
+
+.content-container {
+  max-width: var(--max-width);
+  padding-top: 8px;
+  padding-bottom: 32px;
+}
+
+/* Navbar */
+.navbar-brand {
+  font-weight: 700;
+  color: var(--brand);
+}
+.navbar {
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9));
+}
+
+/* Cards */
+.card {
+  border: 0;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 20px var(--card-shadow);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 36px rgba(15,23,42,0.12);
+}
+.card .card-title {
+  font-weight: 600;
+  margin-bottom: .25rem;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--brand);
+  border-color: var(--brand);
+}
+.btn-primary:hover, .btn-primary:focus {
+  background-color: var(--brand-700);
+  border-color: var(--brand-700);
+}
+
+/* Forms */
+.form-label {
+  font-weight: 600;
+  font-size: .95rem;
+}
+.form-control:focus {
+  box-shadow: 0 0 0 .15rem rgba(13,110,253,0.12);
+  border-color: var(--brand);
+}
+
+/* Event metadata */
+.small {
+  color: var(--muted);
+}
+
+/* Ticket code / booking success */
+.code-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+.code-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  background: var(--code-bg);
+  border: 1px solid #e6e6e6;
+  padding: .45rem .6rem;
+  border-radius: 8px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Segoe UI Mono", monospace;
+  font-size: .95rem;
+  cursor: pointer;
+  user-select: all;
+  transition: transform .08s ease, background .12s ease;
+}
+.code-badge:hover { transform: translateY(-2px); background: #f3f6ff; }
+.code-badge.copied {
+  background: #e6fbef;
+  border-color: rgba(25,135,84,0.18);
+  box-shadow: 0 6px 18px rgba(25,135,84,0.06);
+}
+
+/* small copy hint */
+.copy-hint {
+  font-size: .8rem;
+  color: var(--muted);
+  margin-top: .5rem;
+}
+
+/* Responsive: stack cards on small screens */
+@media (max-width: 576px) {
+  .card {
+    border-radius: 10px;
+  }
+  .content-container { padding-left: 12px; padding-right: 12px; }
+}
+
+/* Accessibility: high-contrast outlines */
+:focus {
+  outline: 3px solid rgba(13,110,253,0.14);
+  outline-offset: 2px;
+}

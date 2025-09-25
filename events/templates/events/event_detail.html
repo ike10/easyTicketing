@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}{{ event.title }}{% endblock %}
+{% block content %}
+  <h1>{{ event.title }}</h1>
+  <p>{{ event.description }}</p>
+  <p><strong>Venue:</strong> {{ event.venue }}</p>
+  <p><strong>Starts:</strong> {{ event.start_time }}</p>
+  <p><strong>Available tickets:</strong> {{ event.available_tickets }}</p>
+
+  <h3>Book ticket</h3>
+  <form method="post" action="{% url 'book_ticket' event.slug %}">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label class="form-label">Your name</label>
+      <input class="form-control" name="name" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input class="form-control" name="email" type="email" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Quantity</label>
+      <input class="form-control" name="quantity" type="number" min="1" max="{{ event.available_tickets }}" value="1">
+    </div>
+    <button class="btn btn-success" type="submit">Buy</button>
+  </form>
+{% endblock %}

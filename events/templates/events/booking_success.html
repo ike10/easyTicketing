@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Booking successful</h1>
+  <p>You booked ticket(s) for <strong>{{ event.title }}</strong>. Save these codes (each is one ticket):</p>
+  <ul>
+    {% for code in codes %}
+      <li><code>{{ code }}</code></li>
+    {% endfor %}
+  </ul>
+  <a href="/" class="btn btn-primary">Back to events</a>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Event Tickets{% endblock %}</title>
+    <!-- Bootstrap CSS (jsDelivr) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Optional: Zendesk Garden CSS via jsDelivr (see docs) -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  </head>
+  <body class="site-root">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4 shadow-sm">
+      <div class="container">
+        <a class="navbar-brand" href="/">Ticketing</a>
+        <div>
+          {% if user.is_authenticated %}
+            <span class="me-2">Hello, {{ user.username }}</span>
+            <form method="post" action="{% url 'logout' %}" class="d-inline-block m-0" style="vertical-align:middle;">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-secondary btn-sm" aria-label="Logout">Logout</button>
+            </form>
+          {% else %}
+            <a class="btn btn-primary btn-sm me-2" href="{% url 'login' %}">Login</a>
+            <a class="btn btn-outline-primary btn-sm" href="{% url 'signup' %}">Sign up</a>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+
+    <main class="container content-container">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+      {% block content %}{% endblock %}
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>
