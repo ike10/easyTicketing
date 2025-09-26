@@ -1,11 +1,16 @@
-# easyTicketing
+# easyTicketing 
 
-Lightweight Django app for event listing and ticket booking (SQLite, Bootstrap 5, optional Zendesk Garden styling).  
-Project for Advanced Programming (CPE 811).  
+Lightweight Python Django app for event listing and ticket booking (SQLite, Bootstrap 5, optional Zendesk Garden styling).
+Project for Advanced Programming (CPE 811).
+
+Student Name: Oche Emmanuel Ike
 Student ID: 242220011
+Department: Computer Engineering (M.Eng) 
 
-## Overview
+## Overview and Documentation
+
 easyTicketing is a small Django scaffold containing:
+
 - Project: `ticketsite`
 - App: `events`
 - Features: event list/detail, ticket booking (codes), admin, authentication (login, logout, signup)
@@ -16,6 +21,7 @@ This README explains how to run, test, and prepare the project for GitHub.
 ---
 
 ## Requirements
+
 - Python 3.10 — 3.13
 - pip
 - Git (for uploading to GitHub)
@@ -26,34 +32,40 @@ This README explains how to run, test, and prepare the project for GitHub.
 ## Quick start (Linux / macOS / WSL)
 
 1. Create & activate virtualenv
+
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
 2. Install dependencies
+
 ```bash
 pip install --upgrade pip setuptools wheel
 pip install "Django==5.2.6"
 ```
 
 3. Apply migrations
+
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
 4. Create superuser (admin)
+
 ```bash
 python manage.py createsuperuser
 ```
 
 5. (Optional) Create a sample event
+
 ```bash
 python manage.py shell -c "from events.models import Event; from django.utils import timezone; Event.objects.get_or_create(slug='sample-event', defaults=dict(title='Sample Event', start_time=timezone.now(), total_tickets=50, price=0, venue='Online', description='Created by setup'))"
 ```
 
 6. Run development server
+
 ```bash
 python manage.py runserver
 ```
@@ -65,6 +77,7 @@ Open: http://127.0.0.1:8000/ — admin: http://127.0.0.1:8000/admin/
 ## Quick start (Windows PowerShell / CMD)
 
 PowerShell:
+
 ```powershell
 python -m venv venv
 .\venv\Scripts\Activate.ps1
@@ -76,6 +89,7 @@ python manage.py runserver
 ```
 
 CMD:
+
 ```cmd
 python -m venv venv
 venv\Scripts\activate.bat
@@ -89,6 +103,7 @@ python manage.py runserver
 ---
 
 ## Authentication & templates notes
+
 - Auth URLs are mounted under `/accounts/` using `django.contrib.auth.urls`.
   - Login: `/accounts/login/`
   - Logout: `/accounts/logout/` (logout implemented as POST for safety)
@@ -102,6 +117,7 @@ python manage.py runserver
 ---
 
 ## Important files
+
 - `ticketsite/settings.py` — project settings
 - `events/models.py` — Event and Ticket models
 - `events/views.py` — core views (list, detail, booking, signup)
@@ -115,6 +131,7 @@ python manage.py runserver
 ---
 
 ## Booking and ticket behavior
+
 - Booking form submits purchaser name, email, and quantity.
 - Generated ticket codes are shown on the booking success page; codes are clickable for copy-to-clipboard in modern browsers.
 - Tickets are stored in the `Ticket` model; you can extend with payment, email, or check-in flows.
@@ -122,7 +139,9 @@ python manage.py runserver
 ---
 
 ## Running tests
+
 Run Django tests:
+
 ```bash
 python manage.py test
 ```
@@ -132,6 +151,7 @@ python manage.py test
 ## Prepare for GitHub
 
 Recommended `.gitignore` content:
+
 ```text
 venv/
 db.sqlite3
@@ -143,6 +163,7 @@ __pycache__/
 ```
 
 Create requirements:
+
 ```bash
 pip freeze > requirements.txt
 # or pin:
@@ -150,6 +171,7 @@ echo "Django==5.2.6" > requirements.txt
 ```
 
 Initialize git and push:
+
 ```bash
 git init
 git add .
@@ -162,6 +184,7 @@ git push -u origin main
 ---
 
 ## Deployment notes
+
 - Use PostgreSQL or MySQL in production (not SQLite).
 - Set `DEBUG = False`, configure `SECRET_KEY`, and populate `ALLOWED_HOSTS`.
 - Run `python manage.py collectstatic` and serve static files via your web server.
@@ -170,6 +193,7 @@ git push -u origin main
 ---
 
 ## Troubleshooting
+
 - Template parse errors: check `{% load ... %}` lines and templatetag locations.
 - `Invalid filter: 'add_class'`: see Authentication & templates notes above.
 - Clipboard copy may require HTTPS or localhost in some browsers.
@@ -178,19 +202,8 @@ git push -u origin main
 ---
 
 ## Extending the project ideas
+
 - Add payment integration (Stripe/PayPal).
 - Send booking confirmation emails.
 - Implement ticket check-in and `Ticket.is_used` updates.
 - Export reports (CSV) and add admin dashboards.
-
----
-
-## License & credits
-Add a LICENSE file (e.g., MIT) before publishing if desired.
-
----
-
-If you want, I can:
-- add `.gitignore` and `requirements.txt` to the repo,
-- add a Dockerfile or Procfile for deployment,
-- add CONTRIBUTING.md or a short project demo GIF for the repo landing page.
